@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1><a href="{% url 'home' %}">Home</a></h1>
+    <div style="display: flex; flex-direction: row; align-items: center;">
+        <h1>{{group.name}}</h1>
+        <h3 style="padding-left: 15px;padding-top: 10px;"><a href="{%url 'edit_group' pk=group.pk %}">Edit Name</a></h3>
+        <h3 style="padding-left: 15px;padding-top: 10px;"><a href="{%url 'del_group' pk=group.pk %}">Delete</a></h3>
+    </div>
+    <h3><a href="{% url 'new_link' pk=group.id%}">Add Link</a></h3>
+    {% for link in links %}
+    <div style="display: flex; flex-direction: row; align-items: center;">
+        <h3><a href={{link.text}}>{{link.text}}</a></h3>
+        <h3><a style="padding-left: 15px;" href="{% url 'del_link' pk=link.id g_pk=group.id %}">Delete</a></h3>
+    </div>    
+    {% endfor %}
+</body>
+</html>

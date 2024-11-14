@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>Groups</h1>
+    <h4><a href="{% url 'new_group' %}">Add Group</a></h4>
+    {% for group in groups %}
+        <h3><a href="{% url 'group' pk=group.pk %}">{{group.name}}</a></h3>
+    {% endfor %}
+</body>
+</html>
