@@ -4,7 +4,10 @@ from .forms import GroupForm, LinkForm
 
 # Create your views here.
 def home(request):
-    groups = Group.objects.all()
+    if not request.user.is_authenticated:
+        return redirect('login_user')
+    user=request.user
+    groups = Group.objects.filter(user_id=user.id)
     return render(request, 'article/home.html', {'groups':groups})
 
 def group(request, pk):
@@ -18,6 +21,7 @@ def new_group(request):
         form = GroupForm(request.POST)
         if form.is_valid():
             group = form.save(commit=False)
+            group.user_id = request.user
             group.save()
             return redirect('home')
     else:
